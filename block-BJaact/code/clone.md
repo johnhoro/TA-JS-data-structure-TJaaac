@@ -45,8 +45,8 @@ console.log(person == personTwo); // false
 console.log(person === personTwo); // false
 console.log(person.address === personTwo.address); // true
 console.log(person.address == personTwo.address); // true
-console.log(personTwo.address.city); // San Jose
-console.log(person.address.city); // San Jose
+console.log(personTwo.address.city); // Navada
+console.log(person.address.city); // Navada
 console.log(person.address.city == personTwo.address.city); // true
 ```
 
@@ -104,7 +104,7 @@ let blogs = [
 ];
 
 // Your code goes here
-let clonedBlogs = { ...blogs };
+let clonedBlogs = [{ ...blogs[0] }, { ...blogs[1] }, { ...blogs[2] }];
 ```
 
 5. Clone the `question` variable into a new variable named `questionClone`
@@ -130,7 +130,10 @@ var questions = [
 ];
 
 // Your code goes here
-let questionClone = [ ...questions ,responses:[...questions[0].responses]];
+let questionClone = [
+  { ...question[0], responses: [...question[0].responses] },
+  { ...question[1], responses: [...question[1].responses] },
+];
 ```
 
 6. Clone the `allBlogs` variable into a new variable named `allBlogsClone`
@@ -158,7 +161,15 @@ var allBlogs = {
 };
 
 // Your code goes here
-let allBlogsClone = { ...allBlogs, comments: [...allBlogs.comments] };
+let allBlogsClone = JSON.parse(JSON.stringify(allBlogs));
+
+let allBlogsClone = {
+  ...allBlogs,
+  author: {
+    ...allBlogs.author,
+  },
+  comments: [{ ...allBlogs.comments[0] }, { ...allBlogs.comments[1] }],
+};
 ```
 
 7. Clone the `person` variable into a new variable named `clonedPerson`
@@ -192,13 +203,21 @@ let person = [
 ];
 
 // Your code goes here
+let clonedPerson = JSON.parse(JSON.stringify(person));
 ```
 
 8. Write a function named `cloneObject` that accepts an object and returns the clone of the object
 
 ```js
-function cloneObject() {
-  // your code
+function cloneObject(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+function cloneObject(obj) {
+  if (typeof obj !== object) return;
+  let clonedObje = {};
+  for (let key in obj) {
+    clonedObj[key] = obj[key];
+  }
 }
 
 // Run the test below to check your function
